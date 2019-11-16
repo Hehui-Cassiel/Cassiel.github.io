@@ -7,15 +7,17 @@
   
   <title>first | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="学习日记一1.如何搭建github博客 ①注册一个github账号 ②安装下载node.js ③安装npm ④检验node和npm是否安装成功，在cmd中输入指令：node-v 和 npm -v#2.安装搭建">
+  <meta name="description" content="学习日记一1.如何搭建github博客 ①注册一个github账号 ②安装下载node.js ③安装npm ④检验node和npm是否安装成功，在cmd中输入指令：node-v 和 npm -v#2.安装搭建HEXO和Git使用安装语句，并检验是否成功1.npm install -g hexo-cli2.hexo -v3.建站①在终端切换（cd）一个你想指定的目录(blog)，执行下面这个命令&amp;n">
 <meta property="og:type" content="article">
 <meta property="og:title" content="first">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;16&#x2F;first&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="学习日记一1.如何搭建github博客 ①注册一个github账号 ②安装下载node.js ③安装npm ④检验node和npm是否安装成功，在cmd中输入指令：node-v 和 npm -v#2.安装搭建">
+<meta property="og:description" content="学习日记一1.如何搭建github博客 ①注册一个github账号 ②安装下载node.js ③安装npm ④检验node和npm是否安装成功，在cmd中输入指令：node-v 和 npm -v#2.安装搭建HEXO和Git使用安装语句，并检验是否成功1.npm install -g hexo-cli2.hexo -v3.建站①在终端切换（cd）一个你想指定的目录(blog)，执行下面这个命令&amp;n">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-16T11:26:47.875Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;u9j4n3b.png">
+<meta property="og:updated_time" content="2019-11-16T12:15:57.003Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;u9j4n3b.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -88,13 +90,26 @@
 <li>①注册一个github账号</li>
 <li>②安装下载<a href="https://nodejs.org/en/" target="_blank" rel="noopener">node.js</a></li>
 <li>③安装npm</li>
-<li>④检验node和npm是否安装成功，在cmd中输入指令：node-v 和 npm -v<br>#2.安装搭建 </li>
+<li>④检验node和npm是否安装成功，在cmd中输入指令：node-v 和 npm -v<br>#2.安装搭建<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">HEXO</a>和Git<br>使用安装语句，并检验是否成功<br><br>1.npm install -g hexo-cli<br><br>2.hexo -v<h1 id="3-建站"><a href="#3-建站" class="headerlink" title="3.建站"></a>3.建站</h1>①在终端切换（cd）一个你想指定的目录(blog)，执行下面这个命令<br><br>&nbsp; &nbsp; hexo init blog</li>
 </ol>
+<p>②在这个目录下会出现你刚刚创建的blog文件夹，切换到（cd）blog文件夹执行以下命令来安装npm<br><br> &nbsp; &nbsp; npm install </p>
+<p>③执行以下命令来开启服务器<br>&nbsp; &nbsp;hexo server   </p>
+<p>④开启后访问<a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/
+</a><br><img src="https://i.imgur.com/u9j4n3b.png" alt="示例"></p>
+<h1 id="4-与github联系起来"><a href="#4-与github联系起来" class="headerlink" title="4.与github联系起来"></a>4.与github联系起来</h1><ol>
+<li>首先创造一个新的仓库，给仓库命名（示例：everything<strong>.github,io</strong>，其中everything可改变，加粗地方不可变）</li>
+<li>将blog名下的_config.yml内容那个最后更改为<br></li>
+</ol>
+<p><em>deploy:<br></em><br><em>&nbsp; &nbsp;&nbsp;type:git<br>&nbsp;&nbsp;&nbsp;&nbsp;repository:<a href="https://github.com/username/username.github.io.git" target="_blank" rel="noopener">https://github.com/username/username.github.io.git</a></em></p>
+<ol>
+<li>在blog目录下执行命令 <br><br>//生成静文件</br><br>hexo generate<br>//部署网站</br><br>hexo deploy <br><br>此时可以访问属于自己的网站了<a href="https://username.github.io/" target="_blank" rel="noopener">https://username.github.io/</a><h1 id="5-建立博客后怎样发布"><a href="#5-建立博客后怎样发布" class="headerlink" title="5.建立博客后怎样发布"></a>5.建立博客后怎样发布</h1>在本地文件中，用Git Bash执行<br><br>hexo new “filename”<br><br>hexo g<br><br>hexo s<br><br>hexo d<br></li>
+</ol>
+<p><em>1.hexo g #完整命令为hexo generate,用于生成静*态文件<br><br> 2.hexo s #完整命令为hexo server,用于启动服务器，主要用来本地预览<br><br> 3. hexo d #完整命令为hexo deploy,用于将本地文件发布到github等git仓库上</em><br><br> 4. hexo n “my article” #完整命令为hexo new,用于新建一篇名为“filename”的文章*</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/16/first/" data-id="ck31i3liu0000f4tfg7xl1v4j" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/16/first/" data-id="ck31ikwd500018gtfahgd6q8q" class="article-share-link">Share</a>
       
       
     </footer>
