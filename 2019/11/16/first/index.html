@@ -218,13 +218,22 @@ hexo d&nbsp;&nbsp;&nbsp;&nbsp;#完整命令为hexo deploy,用于将本地文件�
 <p style="font-family:'宋体';font-size:18px;">其实就是拿到你喜欢主题的链接，然后到blog目录下执行命令 </p>
 <p style="background-color:BLACK;color:#F0F0F0;background-color:BLACK;color:#F0F0F0;">git clone 链接地址</p>
 <p style="font-family:'宋体';font-size:18px;">下载成功的主题拖到themes文件夹里</p>
-![](https://img-blog.csdn.net/20171101114537424?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzI0MjM5MTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+如图所示：![](https://img-blog.csdn.net/20171101114537424?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzI0MjM5MTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 ![](https://img-blog.csdn.net/20171101114612642?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzI0MjM5MTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 ![](https://img-blog.csdn.net/20171101114629616?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzI0MjM5MTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 <p style="font-family:'宋体';font-size:18px;">改完后输入命令:</p>
 <p style="background-color:BLACK;color:#F0F0F0;background-color:BLACK;color:#F0F0F0;font-size:26px">hexo clean</p>
 <p style="background-color:BLACK;color:#F0F0F0;background-color:BLACK;color:#F0F0F0;font-size:26px">hexo g</p>
 <p style="font-family:'arial';background-color:BLACK;color:#F0F0F0;font-size:26px">hexo d</p>
+<p style="font-family:arial;color:red;font-size:25px;">易出现的两个错误:</p>
+<p style="font-family:'宋体';font-size:18px;">第一个错误</p>
+<p style="font-family:'宋体';font-size:18px;">1.检查下载的主题是不是放在了themes文件夹下面，比如next主题的放置，就是点开themes就看到next的文件夹，next下面就是主题的文件，不能打开next文件夹还有themes</p>
+<p style="font-family:'宋体';font-size:18px;">  2.检查站点配置_config.yml是不是下面的形式  theme: 你的主题名字 
+ </br>注意：
+（1）这里是theme，不是themes.      </br>         （2）theme后面与主题名直接有一个空格。 </br>                （3）主题名字是否与themes文件夹下 主题的名字一致。 </br>   
+比如next：theme: next,冒号后面有空格。  假如全部一致还运行有错，建议每次修改后  你先输入命令hexo clean清理一下原来的配置，然后hexo s --debug运行，浏览器页面打开隐身模式重新打开一个页面。</p> 
+<p style="font-family:'宋体';font-size:18px;"> 第二个错误：  本地主题样式修改完之后，本地运行访问都对，然后hexo d部署到github上面后访问没有样式。  打开站点配置_config.yml  更改其中的url和root配置  url: 这里是GitHub给你分配的地址  root: /项目名  然后重新 hexo g  接着hexo d 解决问题。</p>
+
                 <hr>
                 
 
@@ -310,13 +319,22 @@ hexo d    #完整命令为hexo deploy,用于将本地文件发布到github�
 其实就是拿到你喜欢主题的链接，然后到blog目录下执行命令 
 git clone 链接地址
 下载成功的主题拖到themes文件夹里
-![](https://img-blog.csdn.net/20171101114537424?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzI0MjM5MTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+如图所示：![](https://img-blog.csdn.net/20171101114537424?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzI0MjM5MTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 ![](https://img-blog.csdn.net/20171101114612642?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzI0MjM5MTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 ![](https://img-blog.csdn.net/20171101114629616?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzI0MjM5MTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 改完后输入命令:
 hexo clean
 hexo g
-hexo d</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">申请github账号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">搭建环境 </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text"> 搭建hexo和git </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">建站 </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">与github联系起来 </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">建立博客后怎样发布 </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">主题更换 </span></a></li></ol></li></ol>
+hexo d
+易出现的两个错误:
+第一个错误
+1.检查下载的主题是不是放在了themes文件夹下面，比如next主题的放置，就是点开themes就看到next的文件夹，next下面就是主题的文件，不能打开next文件夹还有themes
+  2.检查站点配置_config.yml是不是下面的形式  theme: 你的主题名字 
+ 注意：
+（1）这里是theme，不是themes.               （2）theme后面与主题名直接有一个空格。                 （3）主题名字是否与themes文件夹下 主题的名字一致。    
+比如next：theme: next,冒号后面有空格。  假如全部一致还运行有错，建议每次修改后  你先输入命令hexo clean清理一下原来的配置，然后hexo s --debug运行，浏览器页面打开隐身模式重新打开一个页面。 
+ 第二个错误：  本地主题样式修改完之后，本地运行访问都对，然后hexo d部署到github上面后访问没有样式。  打开站点配置_config.yml  更改其中的url和root配置  url: 这里是GitHub给你分配的地址  root: /项目名  然后重新 hexo g  接着hexo d 解决问题。
+</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">申请github账号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">搭建环境 </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text"> 搭建hexo和git </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">建站 </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">与github联系起来 </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">建立博客后怎样发布 </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">主题更换 </span></a></li></ol></li></ol>
                 </div>
             </div>
         </div>
