@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="Hexo" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        使用C++实现五子棋｜Hehui-Cassiel&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://yoursite.com/2019/11/24/使用C++实现五子棋/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('http://www.touxiang.cn/uploads/20120518/18-092103_594.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Hexo
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://i04piccdn.sogoucdn.com/364261d1de42474a">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://i04piccdn.sogoucdn.com/364261d1de42474a')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>使用C++实现五子棋</h1>
+                    
+                    <span class="meta">
+                         作者 He Hui
+                        <span>
+                          日期 2019-11-24
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            使用C++实现五子棋
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h1 align="left">来开始一个小游戏吧</h1>
+<img src="http://is3.mzstatic.com/image/thumb/Purple71/v4/10/30/14/1030141c-30dc-06b5-08b4-8d6788db49e9/source/512x512bb.jpg">
+<p style="font-family:arial;color:#006030;font-size:28px;"><b>简介:</b></p>
+<p style="font-family:'宋体';color:;font-size:22px;">&nbsp;&nbsp;&nbsp;&nbsp;五子棋是全国智力运动会竞技项目之一，是一种两人对弈的纯策略型棋类游戏。通常双方分别使用黑白两色的棋子，下在棋盘直线与横线的交叉点上，先形成5子连线者获胜。</p>
+<p style="font-family:arial;color:#006030;font-size:28px;"><b>规则:</b></p>
+<p style="font-family:'宋体';color:;font-size:22px;">&nbsp;&nbsp;(1)对局双方各执一色棋子。<br/>
+<img src="https://raw.githubusercontent.com/Hehui-Cassiel/picture/master/%E4%BA%94%E5%AD%90%E6%A3%8B1.png">
+&nbsp;&nbsp;(2)空棋盘开局。<br/>
+&nbsp;&nbsp;(3)黑先、白后，交替下子，每次只能下一子。<br/>
+<img src="https://raw.githubusercontent.com/Hehui-Cassiel/picture/master/%E4%BA%94%E5%AD%90%E6%A3%8B2.png">
+&nbsp;&nbsp;(4)棋子下在棋盘的空白点上，棋子下定后，不得向其它点移动，不得从棋盘上拿掉或拿起另落别处。<br/>
+&nbsp;&nbsp;(5)黑方的第一枚棋子可下在棋盘任意交叉点上。<br/>
+&nbsp;&nbsp;(6)轮流下子是双方的权利，但允许任何一方放弃下子权（即：PASS权）<br/>
+五子棋对局，执行黑方指定开局、三手可交换、五手两打的规定。整个对局过程中黑方有禁手，白方无禁手。黑方禁手有三三禁手、四四禁手和长连禁手三种</p>
+<p style="font-family:arial;color:#006030;font-size:28px;"><b>实现方案:</b></p>
+<p style="font-family:'宋体';color:;font-size:22px;">&nbsp;&nbsp;(1)首先模拟一个棋盘，提供玩家VS电脑，玩家VS玩家两种玩法
+<br/>
+&nbsp;&nbsp;(2)按照要求输入坐标<br/>
+&nbsp;&nbsp;(3)当输入不合法时，重新输入<br/>
+&nbsp;&nbsp;(4)判断输赢<br/>
+&nbsp;&nbsp;(5)选择是否进行下一局游戏</p>
+<p style="font-family:arial;color:#006030;font-size:25px;"><b>源代码如下:</b></p>
+<pre ><code style="font-family:'verdana';color:;font-size:20px;">
+
+<p>#define _CRT_SECURE_NO_WARNINGS 1<br>#include &lt;iostream&gt;<br>#include &lt;stdio.h&gt;<br>#include &lt;stdlib.h&gt;<br>#include &lt;time.h&gt;<br>#include &lt;string.h&gt;<br>using namespace std;<br>const int N = 15;       //15*15的棋盘<br>const char ChessBoard = ‘ ‘;  //棋盘标志<br>const char flag1 = ‘o’;    //玩家1或电脑标志<br>const char flag2 = ‘x’;    //玩家2标志</p>
+<p>typedef struct Position{    //坐标<br>    int row;        //行<br>    int col;        //列<br>}Position;</p>
+<p>class GoBang{     //五子棋类<br>public:<br>    GoBang(){<br>        InitChessBoard();      //初始化棋盘<br>    }<br>    void Play(){      //下棋<br>        Position Play1;   //玩家1或电脑<br>        Position Play2;   //玩家2<br>        while (1){<br>            int mode = ChoiceMode();<br>            while (1){<br>                if (mode == 1){       //电脑VS玩家<br>                    ComputerChess(Play1, flag1);            //电脑走<br>                    if (GetVictory(Play1, 0, flag1)){       //0代表电脑，为真则表示电脑获胜<br>                        break;<br>                    }<br>                    PlayChess(Play2, 2, flag2);         //玩家2走<br>                    if (GetVictory(Play2, 2, flag2)){       //2代表玩家2<br>                        break;<br>                    }<br>                }<br>                else{               //玩家1VS玩家2<br>                    PlayChess(Play1, 1, flag1);         //玩家1走<br>                    if (GetVictory(Play1, 1, flag1)){       //玩家1赢<br>                        break;<br>                    }<br>                    PlayChess(Play2, 2, flag2);         //玩家2走<br>                    if (GetVictory(Play2, 2, flag2)){       //玩家2赢<br>                        break;<br>                    }<br>                }<br>            }<br>            cout &lt;&lt; “======再来一局=======” &lt;&lt; endl;<br>            cout &lt;&lt; “yes or no :”;<br>            char s[] = “yes”;<br>            cin &gt;&gt; s;<br>            if (strcmp(s, “no”) == 0){<br>                break;<br>            }<br>        }<br>    }</p>
+<p>protected:<br>    void InitChessBoard(){          //初始化棋盘<br>        for (int i = 0; i &lt; N + 1; ++i){<br>            for (int j = 0; j &lt; N + 1; ++j){<br>                _ChessBoard[i][j] = ChessBoard;<br>            }<br>        }<br>    }</p>
+<pre><code>int ChoiceMode(){           //选择模式
+    system(&quot;cls&quot;);
+    //系统调用，清屏
+    InitChessBoard();       //重新初始化棋盘
+    cout &lt;&lt; &quot;**0、退出**&quot; &lt;&lt; endl;
+    cout &lt;&lt; &quot;**1、电脑VS玩家**&quot; &lt;&lt; endl;
+    cout &lt;&lt; &quot;**2、玩家VS玩家**&quot; &lt;&lt; endl;
+    cout &lt;&lt; &quot;输入示例：X Y  (X,Y之间为空格)&quot; &lt;&lt; endl;
+
+    while (1){
+        int i = 0;
+        cout &lt;&lt; &quot;请选择模式：&quot;;
+        cin &gt;&gt; i;
+        if (i == 0){       //退出
+            exit(1);
+        }
+        if (i == 1 || i == 2){
+            return i;
+        }
+        else{
+            cout &lt;&lt; &quot;非法输入，请重新输入！&quot; &lt;&lt; endl;
+        }
+    }
+}
+
+void PrintChessBoard(){        //打印棋盘
+    printf(&quot;     1   2   3   4   5   6   7   8   9  10  11  12  13  14  15\n&quot;);
+    printf(&quot;   |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|\n&quot;);
+    for (int i = 1; i &lt; N + 1; ++i)
+    {
+        printf(&quot;%2d &quot;, i);
+        printf(&quot;| %c | %c | %c | %c | %c | %c | %c | %c | %c | %c | %c | %c | %c | %c | %c |\n&quot;, _ChessBoard[i][1], _ChessBoard[i][2], _ChessBoard[i][3], _ChessBoard[i][4], _ChessBoard[i][5], _ChessBoard[i][6], _ChessBoard[i][7], _ChessBoard[i][8], _ChessBoard[i][9], _ChessBoard[i][10], _ChessBoard[i][11], _ChessBoard[i][12], _ChessBoard[i][13], _ChessBoard[i][14], _ChessBoard[i][15]);
+        printf(&quot;   |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|\n&quot;);
+    }
+    cout &lt;&lt; endl;
+}
+
+void ComputerChess(Position&amp; pos, char flag){     //电脑走
+    //PrintChessBoard();      //打印棋盘
+    int x = 0;
+    int y = 0;
+    while (1){                    //循环查找空位置
+        x = (rand() % N) + 1;      //产生从1~N的随机数
+        srand((unsigned int)time(NULL));
+        y = (rand() % N) + 1;      //产生从1~N的随机数
+        srand((unsigned int)time(NULL));
+        if (_ChessBoard[x][y] == ChessBoard){       //如果这个位置为空（没有棋子），跳出循环，下棋
+            break;
+        }
+    }
+    pos.row = x;
+    pos.col = y;
+    _ChessBoard[pos.row][pos.col] = flag;
+}
+
+void PlayChess(Position&amp; pos, int player, char flag){
+    PrintChessBoard();      //打印棋盘
+    while (1){
+        printf(&quot;请玩家%d输入坐标：&quot;, player);
+        cin &gt;&gt; pos.row &gt;&gt; pos.col;
+        if (JudgeValue(pos) == 1){        //判断坐标是否合法
+            break;
+        }
+        cout &lt;&lt; &quot;坐标不合法，请重新输入：&quot; &lt;&lt; endl;
+    }
+    _ChessBoard[pos.row][pos.col] = flag;
+}
+
+int JudgeValue(const Position&amp; pos){       //判断坐标的合法性
+    //1.在棋盘上
+    if (pos.row &gt; 0 &amp;&amp; pos.row &lt;= N &amp;&amp; pos.col &gt; 0 &amp;&amp; pos.col &lt;= N){
+        //2.所在位置为空（没有棋子）
+        if (_ChessBoard[pos.row][pos.col] == ChessBoard){
+            return 1;      //合法
+        } 
+    }
+    return 0;       //非法
+}
+
+int JudgeVictory(Position pos, char flag){     //判断是否有玩家获胜（底层判断）
+    int begin = 0;
+    int end = 0;
+
+    //1.判断行是否满足条件
+    (pos.col - 4) &gt; 0 ? begin = (pos.col - 4) : begin = 1;
+    (pos.col + 4) &gt; N ? end = N : end = (pos.col + 4);
+    for (int i = pos.row, j = begin; j + 4 &lt;= end; ++j){
+        if (_ChessBoard[i][j] == flag &amp;&amp; _ChessBoard[i][j + 1] == flag &amp;&amp;
+            _ChessBoard[i][j + 2] == flag &amp;&amp; _ChessBoard[i][j + 3] == flag &amp;&amp;
+            _ChessBoard[i][j + 4] == flag)
+            return 1;
+    }
+    //2.判断列是否满足条件
+    (pos.row - 4) &gt; 0 ? begin = (pos.row - 4) : begin = 1;
+    (pos.row + 4) &gt; N ? end = N : end = (pos.row + 4);
+    for (int j = pos.col, i = begin ; i + 4 &lt;= end; ++i){
+        if (_ChessBoard[i][j] == flag &amp;&amp; _ChessBoard[i + 1][j] == flag &amp;&amp;
+            _ChessBoard[i + 2][j] == flag &amp;&amp; _ChessBoard[i + 3][j] == flag &amp;&amp;
+            _ChessBoard[i + 4][j] == flag)
+            return 1;
+    }
+    //3.判断主对角线是否满足条件
+    int len = 0;    //相对长度
+    int start = 0;
+    int finish = 0;
+    pos.row &gt; pos.col ? len = pos.col - 1 : len = pos.row - 1;
+    if (len &gt; 4){
+        len = 4;
+    }
+    begin = pos.row - len;       //横坐标起始位置
+    start = pos.col - len;       //纵坐标起始位置
+
+    pos.row &gt; pos.col ? len = N - pos.row : len = N - pos.col;
+    if (len &gt; 4){
+        len = 4;
+    }
+    end = pos.row + len;         //横坐标结束位置
+    finish = pos.col + len;      //纵坐标结束位置
+
+    for (int i = begin, j = start; (i + 4 &lt;= end) &amp;&amp; (j + 4 &lt;= finish); ++i, ++j){
+        if (_ChessBoard[i][j] == flag &amp;&amp; _ChessBoard[i + 1][j + 1] == flag &amp;&amp;
+            _ChessBoard[i + 2][j + 2] == flag &amp;&amp; _ChessBoard[i + 3][j + 3] == flag &amp;&amp;
+            _ChessBoard[i + 4][j + 4] == flag)
+            return 1;
+    }
+    //4.判断副对角线是否满足条件
+    (pos.row - 1) &gt; (N - pos.col) ? len = N - pos.col : len = pos.row - 1;
+    if (len &gt; 4){
+        len = 4;
+    }
+    begin = pos.row - len;       //横坐标起始位置
+    start = pos.col + len;       //纵坐标起始位置
+
+    (N - pos.row) &gt; (pos.col - 1) ? len = pos.col - 1 : len = N - pos.row;
+    if (len &gt; 4){
+        len = 4;
+    }
+    end = pos.row + len;         //横坐标结束位置
+    finish = pos.col - len;      //纵坐标结束位置 
+    for (int i = begin, j = start; (i + 4 &lt;= end) &amp;&amp; (j - 4 &gt;= finish); ++i, --j){
+        if (_ChessBoard[i][j] == flag &amp;&amp; _ChessBoard[i + 1][j - 1] == flag &amp;&amp;
+            _ChessBoard[i + 2][j - 2] == flag &amp;&amp; _ChessBoard[i + 3][j - 3] == flag &amp;&amp;
+            _ChessBoard[i + 4][j - 4] == flag)
+            return 1;
+    }
+    //该位置并未下棋
+    for (int x = 1; x &lt; N + 1; ++x){
+        for (int y = 1; y &lt; N + 1; ++y){
+            if (_ChessBoard[x][y] == ChessBoard){
+                return 0;       //未下棋
+            }
+        }
+    }
+    return -1;      //和局
+}
+
+bool GetVictory(Position&amp; pos, int player, char flag){       //判断具体哪位玩家赢
+    if (JudgeVictory(pos, flag) != 0){    //判断有无人获胜
+        if (JudgeVictory(pos, flag) == 1){     //判断是否有人获胜,1表示获胜
+            PrintChessBoard();     //打印棋盘
+            if (player == 0){
+                cout &lt;&lt; &quot;电脑获胜！&quot; &lt;&lt; endl;
+            }
+            else{
+                printf(&quot;恭喜玩家%d获胜！\n&quot;, player);
+            }
+        }
+        else{
+            printf(&quot;和局！\n&quot;);
+        }
+        return true;      //有人获胜
+    }   
+    return false;         //没人获胜
+}</code></pre><p>private:<br>    char _ChessBoard[N + 1][N + 1];    //棋盘<br>};</p>
+<p>int main(){<br>    GoBang g;<br>    g.Play();<br>    system(“pause”);<br>    return 0;<br>}<br></code></pre></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/11/17/third/" data-toggle="tooltip" data-placement="top"
+                           title="third">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">来开始一个小游戏吧</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/Tiamo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/Tiamo2117">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/Hehui-Cassiel">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Hexo 2019
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a href="https://haojen.github.io/" target="_blank" rel="noopener">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://yoursite.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://www.touxiang.cn/uploads/20120518/18-092103_594.jpg">
+</body>
+
+</html>
