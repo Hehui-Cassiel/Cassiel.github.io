@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        Hello World｜Hehui-Cassiel&#39;s blog
+        jieba库的使用｜Hehui-Cassiel&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="http://yoursite.com/2019/11/11/hello-world/">
+    <link rel="canonical" href="http://yoursite.com/2019/11/16/jieba库的使用/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -137,12 +137,12 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>Hello World</h1>
+                    <h1>jieba库的使用</h1>
                     
                     <span class="meta">
                          作者 He Hui
                         <span>
-                          日期 2019-11-11
+                          日期 2019-11-16
                          </span>
                     </span>
                     <div class="tags text-center">
@@ -154,7 +154,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            Hello World
+            jieba库的使用
         </span>
     </div>
 </header>
@@ -165,19 +165,44 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+                <h1 align="center">python中jieba库的使用</h1><br>
+<h2 style="font-family;color:#A0522D;font-size:25px;"> 一.jieba库概述</h2>
+<p style="font-family:'宋体';font-size:20px;">&nbsp;&nbsp;&nbsp;jieba库的分词原理是利用一个中文词库，将待分词的内容与分词词库进行比对，通过图结构和动态规划方法找到最大概率的词组。除了分词，jieba还提供增加自定义中文单词的功能。
+jieba库支持3种分词模式：精确模式，将句子最精确地切开，适合文本分析；全模式，把句子中所有可以成词的词语都扫描出来，速度非常快，但是不能消除歧义：搜索引擎模式，在精确模式的基础上，对长词再次切分，提高召回率，适合用
+于搜索引擎分词。
+jieba库是第三方库，不是python安装包自带的。</p>
+<h2 style="font-family;color:#A0522D;font-size:25px;"> 二.jieba库解析</h2>
+<p style="font-family:'方正姚体';font-size:20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jieba 库主要提供分词功能，可以辅助自定义分词词典。jieba库中包含的主要函数有：
+<h2 style="font-family;color:#A0522D;font-size:25px;"> 三.使用jieba库实现《三国演义》人物出场统计<h2>
+<p>import jieba <br>
+ excludes = {"将军","却说","荆州","二人","不可","不能","如此"}<br>
+<pre ><code style="font-family:'arial';color:;font-size:20px;">
+      txt = open("三国演义.txt", "r", encoding='utf-8').read()<br>
+      words  = jieba.lcut(txt)<br>
+      counts = {}<br>
+      for word in words:<br>
+         &nbsp;&nbsp; &nbsp; if len(word) == 1:<br>
+             &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; continue<br>
+        &nbsp;&nbsp; &nbsp;  elif word == "诸葛亮" or word == "孔明曰":<br>
+             &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; rword = "孔明"<br>
+          &nbsp;&nbsp; &nbsp;elif word == "关公" or word == "云  长":<br>
+              &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;rword = "关羽"<br>
+         &nbsp;&nbsp; &nbsp; elif word == "玄德" or word == "玄德曰":<br>
+            &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;  rword = "刘备"<br>
+         &nbsp;&nbsp; &nbsp; elif word == "孟德" or word == "丞相":<br>
+             &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; rword = "曹操"<br>
+        &nbsp;&nbsp; &nbsp;  else:<br>
+            &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;  rword = word<br>
+         &nbsp;&nbsp; &nbsp; counts[rword] = counts.get(rword,0) + 1<br>
+      for word in excludes:<br>
+        &nbsp;&nbsp; &nbsp; del(counts[word])<br>
+      items = list(counts.items())<br>
+      items.sort(key=lambda x:x[1], reverse=True) <br>
+      for i in range(5):<br>
+      &nbsp;&nbsp; &nbsp;  word, count = items[i]<br>
+       &nbsp;&nbsp; &nbsp;print ("{0:<10}{1:>5}".format(word, count))
+     <br></p>
+</code></pre>
 
                 <hr>
                 
@@ -185,10 +210,15 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2019/11/16/hexo的搭建/" data-toggle="tooltip" data-placement="top"
-                           title="hexo的搭建">&larr; Previous Post</a>
+                        <a href="/2019/11/17/继承和派生/" data-toggle="tooltip" data-placement="top"
+                           title="继承和派生">&larr; Previous Post</a>
                     </li>
                     
+                    
+                    <li class="next">
+                        <a href="/2019/11/16/hexo的搭建/" data-toggle="tooltip" data-placement="top"
+                           title="hexo的搭建">Next Post &rarr;</a>
+                    </li>
                     
                 </ul>
 
@@ -206,7 +236,67 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">python中jieba库的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text"> 一.jieba库概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text"> 二.jieba库解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text"> 三.使用jieba库实现《三国演义》人物出场统计
+import jieba 
+ excludes = {&quot;将军&quot;,&quot;却说&quot;,&quot;荆州&quot;,&quot;二人&quot;,&quot;不可&quot;,&quot;不能&quot;,&quot;如此&quot;}
+
+      txt = open(&quot;三国演义.txt&quot;, &quot;r&quot;, encoding=&#39;utf-8&#39;).read()
+      words  = jieba.lcut(txt)
+      counts = {}
+      for word in words:
+              if len(word) == 1:
+                      continue
+              elif word == &quot;诸葛亮&quot; or word == &quot;孔明曰&quot;:
+                      rword = &quot;孔明&quot;
+              elif word == &quot;关公&quot; or word == &quot;云  长&quot;:
+                      rword = &quot;关羽&quot;
+              elif word == &quot;玄德&quot; or word == &quot;玄德曰&quot;:
+                      rword = &quot;刘备&quot;
+              elif word == &quot;孟德&quot; or word == &quot;丞相&quot;:
+                      rword = &quot;曹操&quot;
+              else:
+                      rword = word
+              counts[rword] = counts.get(rword,0) + 1
+      for word in excludes:
+             del(counts[word])
+      items = list(counts.items())
+      items.sort(key=lambda x:x[1], reverse=True) 
+      for i in range(5):
+            word, count = items[i]
+           print (&quot;{0:5}&quot;.format(word, count))
+     
+
+</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">
+import jieba 
+ excludes = {&quot;将军&quot;,&quot;却说&quot;,&quot;荆州&quot;,&quot;二人&quot;,&quot;不可&quot;,&quot;不能&quot;,&quot;如此&quot;}
+
+      txt = open(&quot;三国演义.txt&quot;, &quot;r&quot;, encoding=&#39;utf-8&#39;).read()
+      words  = jieba.lcut(txt)
+      counts = {}
+      for word in words:
+              if len(word) == 1:
+                      continue
+              elif word == &quot;诸葛亮&quot; or word == &quot;孔明曰&quot;:
+                      rword = &quot;孔明&quot;
+              elif word == &quot;关公&quot; or word == &quot;云  长&quot;:
+                      rword = &quot;关羽&quot;
+              elif word == &quot;玄德&quot; or word == &quot;玄德曰&quot;:
+                      rword = &quot;刘备&quot;
+              elif word == &quot;孟德&quot; or word == &quot;丞相&quot;:
+                      rword = &quot;曹操&quot;
+              else:
+                      rword = word
+              counts[rword] = counts.get(rword,0) + 1
+      for word in excludes:
+             del(counts[word])
+      items = list(counts.items())
+      items.sort(key=lambda x:x[1], reverse=True) 
+      for i in range(5):
+            word, count = items[i]
+           print (&quot;{0:5}&quot;.format(word, count))
+     
+
+</span></a></li></ol></li></ol>
                 </div>
             </div>
         </div>

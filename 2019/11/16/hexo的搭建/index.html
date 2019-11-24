@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="Hexo" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        hexo的搭建｜Hehui-Cassiel&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://yoursite.com/2019/11/16/hexo的搭建/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('http://www.touxiang.cn/uploads/20120518/18-092103_594.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Hexo
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="http://pic1.win4000.com/wallpaper/b/54c090167d95d.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('http://pic1.win4000.com/wallpaper/b/54c090167d95d.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>hexo的搭建</h1>
+                    
+                    <span class="meta">
+                         作者 He Hui
+                        <span>
+                          日期 2019-11-16
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            hexo的搭建
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h1 align="center">搭建hexo博客</h2>
+<h2 style="font-family;color:#A0522D;font-size:25px;"><b>申请github账号</h2>
+<p style=font-size:20px;><a href="https://github.com/" target="_blank" rel="noopener">Github注册页面</a></p>
+<p style="font-family:'宋体';font-size:18px;">输入用户名，Email，密码，注册账号</p>
+<p style="font-family:'宋体';font-size:18px;">创建博客仓库 </p>
+<p style="font-family:'宋体';font-size:18px;">注意，仓库名应该为：用户名.github.io。比如，我的仓库名是：hehui-cassiel.github.io。</p>
+<HR style="FILTER:alpha(opacity=100,finishopacity=0,style=2)" width="80%"color=#987cb9 SIZE=10>
+<h2 style="font-family:arial;color:#A0522D;font-size:25px;"><b>搭建环境 </b></h2>
+<p style="font-family:'宋体';font-size:18px;">1.安装下载<a href="https://nodejs.org/en/" target="_blank" rel="noopener">node.js</a></p>
+<p style="font-family:'宋体';font-size:18px;">2.安装npm</p>
+<p style="font-family:'宋体';font-size:18px;">3.检验node和npm是否安装成功，在cmd中输指令：node-v 和 npm -v</p>
+<h2 style="font-family:arial;color:#A0522D;font-size:25px;"><b> 搭建hexo和git </h2></b>
+<p style="font-family:'宋体';font-size:18px;">  安装<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">HEXO</a></p>
+<p style="font-family:'宋体';font-size:18px;">使用安装语句，并检验是否成功</p>
+<p style="background-color:BLACK;color:#F0F0F0">1.npm install -g hexo-cli<br>
+2.hexo init blog<br>
+3.hexo -v</p>
+<HR style="FILTER:alpha(opacity=100,finishopacity=0,style=2)" width="80%"color=#987cb9 SIZE=10>
+<h2 style="font-family:arial;color:#A0522D;font-size:25px;"><b>建站 </h2></b>
+<p style="font-family:'宋体';font-size:18px;">1.在终端切换（cd）一个你想指定的目录(blog)，执行下面这个命令<br>
+<P style="background-color:BLACK;color:#F0F0F0">&nbsp; &nbsp; hexo init blog</p>
+<p style="font-family:'宋体';font-size:18px;">2.在这个目录下会出现你刚刚创建的blog文件夹，切换到（cd）blog文件夹执行以下命令来安装npm<br>
+<P style="background-color:BLACK;color:#F0F0F0"> &nbsp; &nbsp; npm install<br> 
+<p style="font-family:'宋体';font-size:18px;">③执行以下命令来开启服务器<br>
+<P style="background-color:BLACK;color:#F0F0F0">&nbsp; &nbsp;hexo server  <br>
+<p style="font-family:'宋体';font-size:18px;">④开启后访问[http://localhost:4000/</p>
+<a href="http://localhost:4000/" target="_blank" rel="noopener">(http://localhost:4000/)</a>
+<HR style="FILTER:alpha(opacity=100,finishopacity=0,style=2)" width="80%"color=#987cb9 SIZE=10>
+<h2 style="font-family:arial;color:#A0522D;font-size:25px;"><b>与github联系起来</b> </h2>
+<p style="font-family:'宋体';font-size:18px;">1.首先创造一个新的仓库，给仓库命名（示例：everything.github,io，其中everything可改变，加粗地方不可变）</p>
+<p style="font-family:'宋体';font-size:18px;">2.将blog名下的_config.yml内容那个最后更改为：<br>
+<p style="background-color:BLACK;color:#F0F0F0;style="background-color:BLACK;color:#F0F0F0;>deploy:</br>
+&nbsp; &nbsp;&nbsp;type:git<br>
+&nbsp;&nbsp;&nbsp;&nbsp;repository:https://github.com/username/username.github.io.git</p>
+<p style="font-family:'宋体';font-size:18px;">3.在blog目录下执行命令 </p>
+<p style="background-color:BLACK;color:#F0F0F0">
+hexo generate//生成静文件<br/>    
+hexo deploy//部署网站 </p>
+<p style="font-family:'宋体';font-size:18px;">此时可以访问属于自己的网站了https://username.github.io/</p>
+<HR style="FILTER:alpha(opacity=100,finishopacity=0,style=2)" width="80%"color=#987cb9 SIZE=10>
+<h2 style="font-family:arial;color:#A0522D;font-size:25px;"><b>建立博客后怎样发布 </h2></b>
+<p style="font-family:'宋体';font-size:18px;">在本地文件中，用Git Bash执行</p>
+<p style="background-color:BLACK;color:#F0F0F0;style="background-color:BLACK;color:#F0F0F0;>
+hexo n “my article” &nbsp;&nbsp;&nbsp;&nbsp;#完整命令为hexo new,用于新建一篇名为“filename”的文章<br>
+hexo g&nbsp;&nbsp;&nbsp;&nbsp;#完整命令为hexo generate,用于生成静态文件<br>
+hexo s&nbsp;&nbsp;&nbsp;&nbsp;#完整命令为hexo server,用于启动服务器，主要用来本地预览<br>
+hexo d&nbsp;&nbsp;&nbsp;&nbsp;#完整命令为hexo deploy,用于将本地文件发布到github等git仓库上<br> </p>
+
+<h2 style="font-family:arial;color:#A0522D;font-size:25px;"><b>主题更换 </h2></b>
+<p style="font-family:'宋体';font-size:18px;">参考链接：https://hexo.io/themes/ </p>
+<p style="font-family:'宋体';font-size:18px;">其实就是拿到你喜欢主题的链接，然后到blog目录下执行命令 </p>
+<p style="background-color:BLACK;color:#F0F0F0;background-color:BLACK;color:#F0F0F0;">git clone 链接地址</p>
+<p style="font-family:'宋体';font-size:18px;">下载成功的主题拖到themes文件夹里</p>
+<img src="https://img-blog.csdn.net/20171101114537424?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzI0MjM5MTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="600" height="500" alt="book" title=""/>
+</br>
+<img src="https://img-blog.csdn.net/20171101114612642?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzI0MjM5MTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="600" height="500" alt="book" title=""/>
+</br>
+<img src="https://img-blog.csdn.net/20171101114629616?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzI0MjM5MTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="600" height="150" alt="book" title=""/>
+</br>
+
+<p style="font-family:'宋体';font-size:18px;">改完后输入命令:</p>
+<p style="background-color:BLACK;color:#F0F0F0;background-color:BLACK;color:#F0F0F0;font-size:26px">hexo clean</p>
+<p style="background-color:BLACK;color:#F0F0F0;background-color:BLACK;color:#F0F0F0;font-size:26px">hexo g</p>
+<p style="font-family:'arial';background-color:BLACK;color:#F0F0F0;font-size:26px">hexo d</p>
+<p style="font-family:arial;color:red;font-size:25px;">易出现的两个错误:</p>
+<p style="font-family:'宋体';font-size:18px;">第一个错误</p>
+<p style="font-family:'宋体';font-size:18px;">1.检查下载的主题是不是放在了themes文件夹下面，比如next主题的放置，就是点开themes就看到next的文件夹，next下面就是主题的文件，不能打开next文件夹还有themes</p>
+<p style="font-family:'宋体';font-size:18px;">  2.检查站点配置_config.yml是不是下面的形式  theme: 你的主题名字 
+ </br>注意：
+（1）这里是theme，不是themes.      </br>         （2）theme后面与主题名直接有一个空格。 </br>                （3）主题名字是否与themes文件夹下 主题的名字一致。 </br>   
+比如next：theme: next,冒号后面有空格。  假如全部一致还运行有错，建议每次修改后  你先输入命令hexo clean清理一下原来的配置，然后hexo s --debug运行，浏览器页面打开隐身模式重新打开一个页面。</p> 
+<p style="font-family:'宋体';font-size:18px;"> 第二个错误：  本地主题样式修改完之后，本地运行访问都对，然后hexo d部署到github上面后访问没有样式。  打开站点配置_config.yml  更改其中的url和root配置  url: 这里是GitHub给你分配的地址  root: /项目名  然后重新 hexo g  接着hexo d 解决问题。</p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/11/16/jieba库的使用/" data-toggle="tooltip" data-placement="top"
+                           title="jieba库的使用">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/11/11/hello-world/" data-toggle="tooltip" data-placement="top"
+                           title="Hello World">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text">搭建hexo博客
+申请github账号
+Github注册页面
+输入用户名，Email，密码，注册账号
+创建博客仓库 
+注意，仓库名应该为：用户名.github.io。比如，我的仓库名是：hehui-cassiel.github.io。
+
+搭建环境 
+1.安装下载node.js
+2.安装npm
+3.检验node和npm是否安装成功，在cmd中输指令：node-v 和 npm -v
+ 搭建hexo和git 
+  安装HEXO
+使用安装语句，并检验是否成功
+1.npm install -g hexo-cli
+2.hexo init blog
+3.hexo -v
+
+建站 
+1.在终端切换（cd）一个你想指定的目录(blog)，执行下面这个命令
+    hexo init blog
+2.在这个目录下会出现你刚刚创建的blog文件夹，切换到（cd）blog文件夹执行以下命令来安装npm
+     npm install 
+③执行以下命令来开启服务器
+   hexo server  
+④开启后访问[http://localhost:4000/
+(http://localhost:4000/)
+
+与github联系起来 
+1.首先创造一个新的仓库，给仓库命名（示例：everything.github,io，其中everything可改变，加粗地方不可变）
+2.将blog名下的_config.yml内容那个最后更改为：
+deploy:
+    type:git
+    repository:https://github.com/username/username.github.io.git
+3.在blog目录下执行命令 
+
+hexo generate//生成静文件    
+hexo deploy//部署网站 
+此时可以访问属于自己的网站了https://username.github.io/
+
+建立博客后怎样发布 
+在本地文件中，用Git Bash执行
+
+hexo n “my article”     #完整命令为hexo new,用于新建一篇名为“filename”的文章
+hexo g    #完整命令为hexo generate,用于生成静态文件
+hexo s    #完整命令为hexo server,用于启动服务器，主要用来本地预览
+hexo d    #完整命令为hexo deploy,用于将本地文件发布到github等git仓库上 
+
+主题更换 
+参考链接：https://hexo.io/themes/ 
+其实就是拿到你喜欢主题的链接，然后到blog目录下执行命令 
+git clone 链接地址
+下载成功的主题拖到themes文件夹里
+
+
+
+
+
+
+
+改完后输入命令:
+hexo clean
+hexo g
+hexo d
+易出现的两个错误:
+第一个错误
+1.检查下载的主题是不是放在了themes文件夹下面，比如next主题的放置，就是点开themes就看到next的文件夹，next下面就是主题的文件，不能打开next文件夹还有themes
+  2.检查站点配置_config.yml是不是下面的形式  theme: 你的主题名字 
+ 注意：
+（1）这里是theme，不是themes.               （2）theme后面与主题名直接有一个空格。                 （3）主题名字是否与themes文件夹下 主题的名字一致。    
+比如next：theme: next,冒号后面有空格。  假如全部一致还运行有错，建议每次修改后  你先输入命令hexo clean清理一下原来的配置，然后hexo s --debug运行，浏览器页面打开隐身模式重新打开一个页面。 
+ 第二个错误：  本地主题样式修改完之后，本地运行访问都对，然后hexo d部署到github上面后访问没有样式。  打开站点配置_config.yml  更改其中的url和root配置  url: 这里是GitHub给你分配的地址  root: /项目名  然后重新 hexo g  接着hexo d 解决问题。
+</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">申请github账号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">搭建环境 </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text"> 搭建hexo和git </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">建站 </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">与github联系起来 </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">建立博客后怎样发布 </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">主题更换 </span></a></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/Tiamo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/Tiamo2117">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/Hehui-Cassiel">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Hexo 2019
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a href="https://haojen.github.io/" target="_blank" rel="noopener">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://yoursite.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="http://www.touxiang.cn/uploads/20120518/18-092103_594.jpg">
+</body>
+
+</html>
